@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Etihad Medical · Verified Report</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef1f3;color:#111}
+  .bar{background:#0e5a35;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .bar .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+  .bar .brand svg{width:26px;height:26px}
+  .bar .id{font-family:Consolas,monospace;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:12px;font-size:12px}
+  .toolbar{background:#fff;border-bottom:1px solid #cfd4d8;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .toolbar .status{font-size:13px;color:#555}
+  .toolbar .status b{color:#0e5a35}
+  .btn{background:#0e5a35;color:#fff;border:0;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:13px;font-weight:600;text-decoration:none;display:inline-block}
+  .btn.ghost{background:#fff;color:#0e5a35;border:1px solid #0e5a35}
+  .btn:hover{opacity:.92}
+  .wrap{max-width:1000px;margin:16px auto;padding:0 12px 30px}
+  .paper{background:#fff;border:1px solid #cfd4d8;box-shadow:0 4px 18px rgba(0,0,0,.06);padding:10px;text-align:center}
+  .paper img{max-width:100%;height:auto;display:block;margin:0 auto}
+  .err{background:#fff;border:1px solid #f0c8c8;color:#8a2c2c;padding:20px;border-radius:6px;text-align:center;max-width:520px;margin:60px auto}
+  .footer{max-width:1000px;margin:12px auto 30px;padding:0 12px;font-size:12px;color:#666;text-align:center}
+  .footer code{background:#e8ebee;padding:1px 6px;border-radius:3px}
+
+  @media print{
+    .bar,.toolbar,.footer{display:none !important}
+    body{background:#fff}
+    .wrap{margin:0;padding:0;max-width:100%}
+    .paper{border:0;padding:0;box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand">
+    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#fff" stroke="#0e5a35" stroke-width="2"/><path d="M30 14 v32 M14 30 h32" stroke="#c00" stroke-width="5"/></svg>
+    Etihad Medical Centre Limited
+  </div>
+  <div class="id" id="pill">ID: —</div>
+</div>
+
+<div class="toolbar">
+  <div class="status">Verified medical report · <b id="statusName">loading…</b></div>
+  <div style="display:flex;gap:8px">
+    <button class="btn" onclick="window.print()">Download / Print</button>
+    <a class="btn ghost" id="dlOrig" download>Download original</a>
+  </div>
+</div>
+
+<div class="wrap" id="content">
+  <div class="paper">
+    <img id="img" alt="Medical report" style="display:none">
+  </div>
+</div>
+
+<div id="err" style="display:none"><div class="err">
+  <h3 style="margin:0 0 6px">Report not found</h3>
+  <p style="margin:0">No report is available for the requested ID.</p>
+</div></div>
+
+<div class="footer">
+  Served from <code id="host">—</code> · This page is the authorized verification view for reports issued by Etihad Medical Centre Ltd.
+</div>
+
+<script>
+  // Read ?id=... from the URL
+  const params = new URLSearchParams(location.search);
+  const id = (params.get("id") || "").trim();
+  const folder = params.get("folder") || "reports";
+  const ext = params.get("ext") || "jpeg";
+
+  document.getElementById("host").textContent = location.host || "(local file)";
+
+  if(!id){
+    document.getElementById("content").style.display = "none";
+    document.getElementById("err").style.display = "";
+    document.getElementById("statusName").textContent = "no ID provided";
+  } else {
+    const src = folder + "/" + id + "." + ext;
+    document.getElementById("pill").textContent = "ID: " + id;
+    document.getElementById("statusName").textContent = "Patient " + id;
+    document.getElementById("dlOrig").href = src;
+    document.getElementById("dlOrig").download = id + "." + ext;
+
+    const img = document.getElementById("img");
+    img.onload = () => { img.style.display = "block"; };
+    img.onerror = () => {
+      document.getElementById("content").style.display = "none";
+      document.getElementById("err").style.display = "";
+      document.querySelector("#err .err p").textContent =
+        "Image not found at " + src + ". Confirm the file exists on the server.";
+    };
+    img.src = src;
+  }
+</script>
+</body>
+</html>

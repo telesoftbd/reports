@@ -7,10 +7,9 @@
 <style>
   *{box-sizing:border-box}
   body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef1f3;color:#111}
-  .bar{background:#0e5a35;color:#fff;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-  .bar .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
-  .bar .brand svg{width:26px;height:26px}
-  .bar .id{font-family:Consolas,monospace;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:12px;font-size:12px}
+  .bar{background:#003d6c url(header_banner.png) left center/auto 100% no-repeat;color:#fff;padding:0 20px;height:60px;display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px}
+  .bar .id{font-family:Consolas,monospace;background:rgba(255,255,255,.16);padding:4px 10px;border-radius:12px;font-size:12px}
+  .bar .date{font-family:Consolas,monospace;background:rgba(255,255,255,.16);padding:4px 10px;border-radius:12px;font-size:12px}
   .toolbar{background:#fff;border-bottom:1px solid #cfd4d8;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
   .toolbar .status{font-size:13px;color:#555}
   .toolbar .status b{color:#0e5a35}
@@ -35,10 +34,7 @@
 <body>
 
 <div class="bar">
-  <div class="brand">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#fff" stroke="#0e5a35" stroke-width="2"/><path d="M30 14 v32 M14 30 h32" stroke="#c00" stroke-width="5"/></svg>
-    Etihad Medical Centre Limited
-  </div>
+  <div class="date" id="dateNow">—</div>
   <div class="id" id="pill">ID: —</div>
 </div>
 
@@ -73,6 +69,11 @@
   const ext = params.get("ext") || "jpeg";
 
   document.getElementById("host").textContent = location.host || "(local file)";
+
+  const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const today = new Date();
+  document.getElementById("dateNow").textContent =
+    String(today.getDate()).padStart(2,"0") + "-" + MONTHS[today.getMonth()] + "-" + today.getFullYear();
 
   if(!id){
     document.getElementById("content").style.display = "none";

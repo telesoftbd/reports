@@ -8,7 +8,29 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:'Arial','Helvetica',sans-serif;background:#eef1f3;color:#111}
   
-  .bar{background:#003d6c url(header_banner.png) left center/auto 100% no-repeat;color:#fff;padding:0 20px;height:60px;display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;position:relative}
+  .header-section{background:#fff;border-bottom:2px solid #333;padding:15px 20px}
+  .header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+  
+  .header-left{display:flex;gap:15px;align-items:flex-start;flex:1;min-width:300px}
+  .logo{width:60px;height:60px;border:2px solid #8B0000;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;flex-shrink:0}
+  .logo-text{font-size:10px;font-weight:bold;color:#8B0000;text-align:center;line-height:1.2}
+  
+  .header-text{flex:1}
+  .header-text-bn{font-size:16px;font-weight:700;color:#333;font-family:'Arial','Helvetica',sans-serif;letter-spacing:0.5px;margin:0}
+  .header-text-en{font-size:14px;font-weight:700;color:#333;letter-spacing:0.3px;margin:4px 0 0 0}
+  .header-text-address{font-size:11px;color:#333;margin:3px 0 0 0;line-height:1.3}
+  .header-text-contact{font-size:10px;color:#333;margin:3px 0 0 0}
+  
+  .header-right{display:flex;gap:15px;align-items:flex-start}
+  .info-box{border:1px solid #333;background:#f5f5f5;padding:8px}
+  .info-row{display:flex;margin:5px 0;font-size:10px}
+  .info-label{font-weight:600;min-width:80px;border-right:1px solid #333;padding-right:8px;margin-right:8px}
+  .info-value{flex:1}
+  
+  .qr-box{display:flex;gap:5px;flex-direction:column}
+  .qr-placeholder{width:50px;height:50px;border:1px solid #ccc;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:8px;text-align:center;color:#999}
+  
+  .bar{background:#003d6c;color:#fff;padding:0 20px;height:60px;display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;position:relative}
   
   .version-label{position:absolute;left:20px;font-size:10px;font-family:'Consolas','monospace';color:rgba(255,255,255,.7);font-weight:600;letter-spacing:0.5px}
   
@@ -25,11 +47,11 @@
   .btn.ghost{background:#fff;color:#0e5a35;border:1px solid #0e5a35}
   .btn:hover{opacity:.92}
   
-  .btn-download{background:none;border:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform 0.2s ease;width:36px;height:36px}
+  .btn-download{background:none;border:none;padding:6px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform 0.2s ease;border:1px solid #0e5a35;border-radius:4px}
   .btn-download:hover{transform:scale(1.05)}
-  .btn-download img{height:28px;width:auto;display:block;object-fit:contain}
+  .btn-download-icon{width:20px;height:20px;display:inline-block;margin-right:6px}
   
-  .wrap{max-width:1000px;margin:16px auto;padding:0 12px 30px}
+  .wrap{max-width:1200px;margin:16px auto;padding:0 12px 30px}
   .paper{background:#fff;border:1px solid #cfd4d8;box-shadow:0 4px 18px rgba(0,0,0,.06);padding:10px;text-align:center}
   .paper img{max-width:100%;height:auto;display:block;margin:0 auto}
   
@@ -37,6 +59,10 @@
   
   /* Responsive Design */
   @media (max-width:768px){
+    .header-content{flex-direction:column;gap:15px}
+    .header-left{width:100%}
+    .header-right{width:100%;justify-content:space-between}
+    
     .bar{padding:0 15px;height:70px;gap:5px}
     .version-label{font-size:9px;left:15px}
     .bar .id{font-size:11px;padding:3px 8px}
@@ -45,14 +71,23 @@
     .toolbar{padding:8px 15px;flex-direction:column;align-items:flex-start;gap:8px}
     .toolbar .status{font-size:12px}
     .toolbar-buttons{width:100%;justify-content:flex-start}
-    .btn-download{width:32px;height:32px}
-    .btn-download img{height:24px}
     
     .wrap{padding:0 10px 20px;margin:12px auto}
     .paper{padding:8px}
   }
   
   @media (max-width:480px){
+    .header-left{gap:10px}
+    .logo{width:50px;height:50px;font-size:8px}
+    .header-text-bn{font-size:14px}
+    .header-text-en{font-size:12px}
+    .header-text-address{font-size:9px}
+    .header-text-contact{font-size:9px}
+    
+    .header-right{flex-direction:column;width:100%}
+    .info-box{padding:6px;font-size:9px}
+    .qr-placeholder{width:40px;height:40px}
+    
     .bar{padding:0 10px;height:65px}
     .version-label{font-size:8px;left:10px}
     .bar .id{font-size:10px;padding:2px 6px}
@@ -62,8 +97,6 @@
     .toolbar .status{font-size:11px}
     .toolbar-buttons{flex-direction:column;width:100%;gap:6px}
     .btn{font-size:12px;padding:6px 12px}
-    .btn-download{width:28px;height:28px}
-    .btn-download img{height:20px}
     
     .wrap{padding:0 8px 15px}
     .paper{padding:6px}
@@ -80,6 +113,49 @@
 </head>
 <body>
 
+<div class="header-section">
+  <div class="header-content">
+    <div class="header-left">
+      <div class="logo">
+        <div class="logo-text">ETIHAD<br>MEDICAL<br>CENTRE</div>
+      </div>
+      <div class="header-text">
+        <div class="header-text-bn">ইত্তেহাদ মেডিকেল সেন্টার লিমিটেড</div>
+        <div class="header-text-en">Etihad Medical Centre Limited</div>
+        <div class="header-text-address">48/A-B. Baitul Khair(Lift-4) Purana Paltan, Dhaka.</div>
+        <div class="header-text-contact">E-mail:etihadmedicalbd@gmail.com</div>
+        <div class="header-text-contact">Web:www.etihadmedicalbd.com</div>
+      </div>
+    </div>
+    
+    <div class="header-right">
+      <div class="info-box">
+        <div class="info-row">
+          <div class="info-label">ID NO</div>
+          <div class="info-value" id="headerIDValue">—</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Agency LIC NO</div>
+          <div class="info-value">—</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Examined:</div>
+          <div class="info-value" id="headerDateValue">—</div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">Expiry Date:</div>
+          <div class="info-value">—</div>
+        </div>
+      </div>
+      
+      <div class="qr-box">
+        <div class="qr-placeholder">QR Code</div>
+        <div class="qr-placeholder">QR Code</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="bar" title="Online Fit Certificate">
   <div class="version-label">Software Version [V.21.1.0.3.0]</div>
   <div class="date" id="dateNow">—</div>
@@ -90,7 +166,12 @@
   <div class="status">Online Fit Certificate · <b id="statusName">loading…</b></div>
   <div class="toolbar-buttons">
     <button class="btn-download" id="downloadBtn" onclick="window.print()" title="Download / Print">
-      <img src="header_banner.png" alt="Download / Print">
+      <svg class="btn-download-icon" viewBox="0 0 24 24" fill="none" stroke="#0e5a35" stroke-width="2">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      Download / Print
     </button>
     <a class="btn ghost" id="dlOrig" download>Download original</a>
   </div>
@@ -116,8 +197,9 @@
 
   const MONTHS = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
   const today = new Date();
-  document.getElementById("dateNow").textContent =
-    String(today.getDate()).padStart(2,"0") + "-" + MONTHS[today.getMonth()] + "-" + today.getFullYear();
+  const formattedDate = String(today.getDate()).padStart(2,"0") + "-" + MONTHS[today.getMonth()] + "-" + today.getFullYear();
+  document.getElementById("dateNow").textContent = formattedDate;
+  document.getElementById("headerDateValue").textContent = formattedDate;
 
   if(!id){
     document.getElementById("content").style.display = "none";
@@ -126,6 +208,7 @@
   } else {
     const src = folder + "/" + id + "." + ext;
     document.getElementById("pill").textContent = "ID: " + id;
+    document.getElementById("headerIDValue").textContent = id;
     document.getElementById("statusName").textContent = "Patient " + id;
     document.getElementById("dlOrig").href = src;
     document.getElementById("dlOrig").download = id + "." + ext;

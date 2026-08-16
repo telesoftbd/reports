@@ -16,7 +16,7 @@
   .bar .date{font-family:'Consolas','monospace';background:rgba(255,255,255,.16);padding:4px 10px;border-radius:12px;font-size:12px}
   
   .toolbar{background:#fff;border-bottom:1px solid #cfd4d8;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-  .toolbar .status{font-size:13px;color:#555;font-family:'Arial','Helvetica',sans-serif}
+  .toolbar .status{font-size:13px;color:#555;font-family:'Arial','Helvetica',sans-serif;letter-spacing:0.3px}
   .toolbar .status b{color:#0e5a35;font-weight:700}
   
   .toolbar-buttons{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -25,9 +25,9 @@
   .btn.ghost{background:#fff;color:#0e5a35;border:1px solid #0e5a35}
   .btn:hover{opacity:.92}
   
-  .btn-image{background:none;border:none;padding:0;cursor:pointer;display:inline-block;height:36px;transition:transform 0.2s ease}
-  .btn-image:hover{transform:scale(1.05)}
-  .btn-image img{height:100%;width:auto;display:block}
+  .btn-download{background:none;border:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform 0.2s ease;width:36px;height:36px}
+  .btn-download:hover{transform:scale(1.05)}
+  .btn-download img{height:28px;width:auto;display:block;object-fit:contain}
   
   .wrap{max-width:1000px;margin:16px auto;padding:0 12px 30px}
   .paper{background:#fff;border:1px solid #cfd4d8;box-shadow:0 4px 18px rgba(0,0,0,.06);padding:10px;text-align:center}
@@ -45,7 +45,8 @@
     .toolbar{padding:8px 15px;flex-direction:column;align-items:flex-start;gap:8px}
     .toolbar .status{font-size:12px}
     .toolbar-buttons{width:100%;justify-content:flex-start}
-    .btn-image{height:32px}
+    .btn-download{width:32px;height:32px}
+    .btn-download img{height:24px}
     
     .wrap{padding:0 10px 20px;margin:12px auto}
     .paper{padding:8px}
@@ -61,7 +62,8 @@
     .toolbar .status{font-size:11px}
     .toolbar-buttons{flex-direction:column;width:100%;gap:6px}
     .btn{font-size:12px;padding:6px 12px}
-    .btn-image{height:28px}
+    .btn-download{width:28px;height:28px}
+    .btn-download img{height:20px}
     
     .wrap{padding:0 8px 15px}
     .paper{padding:6px}
@@ -78,7 +80,7 @@
 </head>
 <body>
 
-<div class="bar">
+<div class="bar" title="Online Fit Certificate">
   <div class="version-label">Software Version [V.21.1.0.3.0]</div>
   <div class="date" id="dateNow">—</div>
   <div class="id" id="pill">ID: —</div>
@@ -87,8 +89,8 @@
 <div class="toolbar">
   <div class="status">Online Fit Certificate · <b id="statusName">loading…</b></div>
   <div class="toolbar-buttons">
-    <button class="btn-image" id="downloadBtn" onclick="window.print()" title="Download / Print">
-      <img src="header_banner.png" alt="Download / Print" style="height:36px;width:auto">
+    <button class="btn-download" id="downloadBtn" onclick="window.print()" title="Download / Print">
+      <img src="header_banner.png" alt="Download / Print">
     </button>
     <a class="btn ghost" id="dlOrig" download>Download original</a>
   </div>
